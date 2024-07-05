@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using ProjectTirServer.DataBase;
 
 namespace ProjectTirServer
 {
@@ -9,7 +12,20 @@ namespace ProjectTirServer
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Version = "v1",
+                    Title = "Project Tir API",
+                    Description = ""
+                });
+            });
+
+            builder.Services.AddDbContext<ProjectTirDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString(nameof(ProjectTirDbContext)));
+            });
 
             var app = builder.Build();
 
@@ -18,11 +34,9 @@ namespace ProjectTirServer
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors(policy => policy.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
 
             app.MapControllers();
 
