@@ -1,4 +1,6 @@
-﻿namespace ProjectTirServer.API.EndPoints
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace ProjectTirServer.API.EndPoints
 {
     public static class ServerCheckEndpoints
     {
@@ -12,6 +14,7 @@
         }
 
 
+        [Authorize]
         private static async Task<IResult> CheckServerState()
         {
             return Results.Ok("Server is running");

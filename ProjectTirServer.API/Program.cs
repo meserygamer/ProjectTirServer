@@ -1,7 +1,11 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using ProjectTirServer.API.EndPoints;
+using ProjectTirServer.API.Extensions;
 using ProjectTirServer.DataBase;
+using System.Security.Claims;
 
 namespace ProjectTirServer
 {
@@ -23,6 +27,8 @@ namespace ProjectTirServer
                 });
             });
 
+            builder.Services.AddApiAuthentication();
+
             builder.Services.AddDbContext<ProjectTirDbContext>(options =>
             {
                 options.UseSqlite(builder.Configuration.GetConnectionString(nameof(ProjectTirDbContext)));
@@ -38,6 +44,16 @@ namespace ProjectTirServer
             app.UseCors(policy => policy.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
+
+            app.UseCookiePolicy(new CookiePolicyOptions 
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = HttpOnlyPolicy.Always,
+                Secure = CookieSecurePolicy.Always
+            });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.AddMappedEndPoints();
 
