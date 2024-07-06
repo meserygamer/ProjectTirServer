@@ -11,8 +11,8 @@ using ProjectTirServer.DataBase;
 namespace ProjectTirServer.DataBase.Migrations
 {
     [DbContext(typeof(ProjectTirDbContext))]
-    [Migration("20240705120510_Initial")]
-    partial class Initial
+    [Migration("20240706180527_ProjectTirDbV1.0")]
+    partial class ProjectTirDbV10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,9 @@ namespace ProjectTirServer.DataBase.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")

@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProjectTirServer.API.Extensions;
 using ProjectTirServer.DataBase;
-using System.Security.Claims;
 
 namespace ProjectTirServer
 {

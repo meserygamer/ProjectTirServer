@@ -13,6 +13,9 @@ namespace ProjectTirServer.DataBase.Configurations
             builder.Property(u => u.UserId)
                 .IsRequired();
 
+            builder.Property(u => u.StartDate)
+                .IsRequired();
+
             builder.HasOne(s => s.User)
                 .WithMany(u => u.OpenSessions)
                 .HasForeignKey(s => s.UserId);
