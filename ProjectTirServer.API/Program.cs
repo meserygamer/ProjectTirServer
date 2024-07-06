@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ProjectTirServer.API.EndPoints;
 using ProjectTirServer.DataBase;
 
 namespace ProjectTirServer
@@ -38,7 +39,7 @@ namespace ProjectTirServer
 
             app.UseHttpsRedirection();
 
-            app.MapControllers();
+            app.AddMappedEndPoints();
 
             app.Run();
         }
