@@ -21,7 +21,7 @@ namespace ProjectTirServer.API.EndPoints
 
         private static async Task<IResult> Login(HttpContext context, [FromBody] AuthenticationLoginRequest loginData)
         {
-            ICollection<Claim> claims = new List<Claim>() { new Claim("IdSession", "1") };
+            ICollection<Claim> claims = new List<Claim>() { new Claim("sessionId", Guid.NewGuid().ToString()) };
             ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await context.SignInAsync(new ClaimsPrincipal(identity));
             return Results.Ok("Login completed");

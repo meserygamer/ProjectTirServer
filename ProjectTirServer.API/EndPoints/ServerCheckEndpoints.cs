@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using ProjectTirServer.API.Filters;
 
 namespace ProjectTirServer.API.EndPoints
 {
@@ -8,7 +9,8 @@ namespace ProjectTirServer.API.EndPoints
         {
             var group = builder.MapGroup("serverChecker");
 
-            group.MapGet("checkServerState", CheckServerState);
+            group.MapGet("checkServerState",  CheckServerState)
+                .AddEndpointFilter<SessionFilter>();
 
             return builder;
         }

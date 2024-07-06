@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProjectTirServer.API.Extensions;
+using ProjectTirServer.Core.RepositoryInterfaces;
 using ProjectTirServer.DataBase;
+using ProjectTirServer.DataBase.Repositories;
 
 namespace ProjectTirServer
 {
@@ -11,6 +13,8 @@ namespace ProjectTirServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddTransient<ISessionRepository, SQLiteSessionRepository>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

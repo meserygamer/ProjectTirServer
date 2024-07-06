@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ProjectTirServer.API/ProjectTirDb.db-shm
+/ProjectTirServer.API/ProjectTirDb.db-wal
